@@ -1,10 +1,8 @@
 cloud:
   aws:
-    credentials:
-      access-key: AKIAXR6ZFUBS5BIPIMJL
-      secret-key: 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
     region:
       static: us-east-2
+      auto: false
     stack:
       auto: false
 
@@ -16,8 +14,8 @@ spring:
   servlet:
     multipart:
       enabled: true
-      file-size-threshold: 2MB
-      max-file-size: 5MB
+      file-size-threshold: 10MB
+      max-file-size: 10MB
       max-request-size: 10MB
 
 server:

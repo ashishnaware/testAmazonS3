@@ -4,10 +4,7 @@ import com.example.myapp.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
@@ -18,8 +15,19 @@ public class StorageController {
     StorageService service;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam(value = "file")MultipartFile file){
-        return new ResponseEntity<>(service.uploadFile(file), HttpStatus.OK);
+    public ResponseEntity<String> uploadFile(@RequestParam(value = "file")MultipartFile file,
+                                             @RequestParam(value = "bucket")String bucket_name){
+        return new ResponseEntity<>(service.uploadFile(file,bucket_name), HttpStatus.OK);
+    }
+
+    @PostMapping("/createWorkspace")
+    public ResponseEntity<String> createBucket(@RequestParam(value = "bucketName")String bucketName){
+        return new ResponseEntity<>(service.createBucket(bucketName), HttpStatus.OK);
+    }
+
+    @PostMapping("/deleteWorkspace")
+    public ResponseEntity<String> deleteBucket(@RequestParam(value = "bucketName")String bucketName){
+        return new ResponseEntity<>(service.deleteBucket(bucketName), HttpStatus.OK);
     }
 
 }
